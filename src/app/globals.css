@@ -1,26 +1,191 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Retro "old PC" skin (Curve-ish vibe) ===== */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --retro-bg: #a9a6c8;          /* purple/gray page background */
+  --retro-panel: #bdbdbd;       /* main panel gray */
+  --retro-panel-dark: #8d8d8d;  /* inner border */
+  --retro-panel-light: #efefef; /* highlight */
+  --retro-blue: #3f6aa6;        /* banner blue */
+  --retro-blue-dark: #2f5386;
+  --retro-text: #111;
+  --retro-green: #198f2a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--retro-bg);
+  color: var(--retro-text);
+}
+
+/* big “double border” frame like old UIs */
+.retro-frame {
+  border: 6px double #ffffff;
+  outline: 4px solid #2b2b2b;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.35);
+  background: var(--retro-panel);
+}
+
+/* inner inset panel */
+.retro-panel {
+  background: var(--retro-panel);
+  border: 3px solid var(--retro-panel-dark);
+  box-shadow:
+    inset 2px 2px 0 var(--retro-panel-light),
+    inset -2px -2px 0 #6f6f6f;
+}
+
+/* top banner */
+.retro-banner {
+  background: linear-gradient(180deg, var(--retro-blue) 0%, var(--retro-blue-dark) 100%);
+  border: 4px double #fff;
+  outline: 3px solid #2b2b2b;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.35);
+  color: #fff;
+}
+
+.retro-title {
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.35);
+}
+
+/* old-school button */
+.retro-btn {
+  background: #2f7a2f;
+  color: #fff;
+  border: 2px solid #0b3d0b;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+  padding: 8px 14px;
+  font-weight: 700;
+}
+.retro-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.35);
+}
+
+/* secondary blue buttons */
+.retro-btn-blue {
+  background: #3f6aa6;
+  border: 2px solid #1e3f6e;
+}
+
+/* old-school input */
+.retro-input {
+  background: #0b17ff; /* bright “selected input” blue */
+  color: #fff;
+  border: 2px solid #000;
+  box-shadow: inset 2px 2px 0 rgba(255,255,255,0.35);
+  padding: 10px 12px;
+  font-weight: 700;
+}
+.retro-input::placeholder {
+  color: rgba(255,255,255,0.85);
+}
+
+/* table */
+.retro-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.retro-th {
+  background: #3f6aa6;
+  color: #fff;
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #2b2b2b;
+  border-bottom: 3px solid #2b2b2b;
+  padding: 10px 12px;
+  font-weight: 800;
+}
+.retro-td {
+  background: #bdbdbd;
+  border-top: 2px solid #efefef;
+  border-left: 2px solid #efefef;
+  border-right: 2px solid #6f6f6f;
+  border-bottom: 2px solid #6f6f6f;
+  padding: 10px 12px;
+}
+.retro-link {
+  color: #0b3b8f;
+  text-decoration: underline;
+  font-weight: 800;
+}
+.retro-pill {
+  display: inline-block;
+  background: #e6e6e6;
+  border: 2px solid #2b2b2b;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.retro-green {
+  color: var(--retro-green);
+  font-weight: 900;
+}
+
+/* ===== Retro tooltip (Windows-ish) ===== */
+
+.retro-tip-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.retro-tip-box {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+
+  width: min(520px, calc(100vw - 40px));
+  background: #fff3a6; /* classic yellow tip */
+  color: #111;
+
+  border: 3px solid #2b2b2b;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.35);
+  padding: 10px 12px;
+
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.25;
+
+  z-index: 50;
+  display: none;
+}
+
+/* little arrow */
+.retro-tip-box::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #2b2b2b;
+}
+.retro-tip-box::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #fff3a6;
+}
+
+/* show on hover + keyboard focus */
+.retro-tip-wrap:hover .retro-tip-box,
+.retro-tip-wrap:focus-within .retro-tip-box {
+  display: block;
 }
