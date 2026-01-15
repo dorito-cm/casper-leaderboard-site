@@ -38,12 +38,12 @@ export default function Page() {
   const title = "💎Casper Community Contest 3, Diamond Hands💎";
   const subtitle = (
     <>
-      Build by Dorito, using{" "}
+      by Dorito, using{" "} 
       <span
         title="Enterprise-grade middleware APIs designed to supercharge developers and serve as the primary access point for Casper Network data"
         style={{ textDecoration: "underline dotted", cursor: "help" }}
       >
-        CSPR.cloud
+        CSPR.cloud for all the data
       </span>
       . Always verify on-chain, this is just for testing purposes.
     </>
